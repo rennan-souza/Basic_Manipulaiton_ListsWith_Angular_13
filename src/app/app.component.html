@@ -1,0 +1,47 @@
+<div class="container pt-5">
+  <h1>Cadastrar clientes</h1>
+  <hr>
+  <form (ngSubmit)="submitForm()"  #form="ngForm">
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label>Nome</label>
+        <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome" validation="ngModel" required>
+      </div>
+      <div class="col-md-4">
+        <label>CPF</label>
+        <input type="text" class="form-control" [(ngModel)]="cliente.cpf" name="cpf" #validation="ngModel" mask="000.000.000-00" required>
+      </div>
+      <div class="col-md-4">
+        <label>Email</label>
+        <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email" #validation="ngModel" required>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-success" [disabled]="!form.valid">Adicionar</button>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="clientes.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of clientes">
+          <td>{{ c.nome }}</td>
+          <td>{{ c.cpf }}</td>
+          <td>{{ c.email }}</td>
+          <td><button type="button" class="btn btn-danger" (click)="removerCliente(c)">Remover</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-success" (click)="salvarClientes()">Salvar clientes</button>
+  </div>
+</div>
